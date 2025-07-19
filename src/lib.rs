@@ -11,6 +11,7 @@ fn sum_as_string(a: usize, b: usize) -> PyResult<String> {
 fn test_rust_in_python(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
     m.add_function(wrap_pyfunction!(rust_nth_fibonacci_using_matrix_exponentiation, m)?)?;
+    m.add_function(wrap_pyfunction!(rust_runtime_benchmark, m)?)?;
     Ok(())
 }
 
@@ -49,3 +50,11 @@ fn _multiply(a: [u64; 4], b: [u64; 4]) -> [u64; 4] {
             a[2] * b[1] + a[3] * b[3],
         ]
 }
+
+#[pyfunction]
+fn rust_runtime_benchmark(nth_term: u64) {
+    for n in 0..nth_term {
+        rust_nth_fibonacci_using_matrix_exponentiation(n);
+    }
+}
+
