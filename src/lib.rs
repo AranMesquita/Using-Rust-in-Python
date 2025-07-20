@@ -33,7 +33,7 @@ fn rust_nth_fibonacci_using_matrix_exponentiation(n: u64) -> u64 {
 fn _power(mut m: [u64; 4], mut n: u64) -> [u64; 4] {
         let mut result: [u64; 4] = [1, 0, 0, 1];
         while n > 0 {
-            if n % 2 == 1 {
+            if n % 2 != 0 {
                 result = _multiply(result, m);
             }
             m = _multiply(m, m);
